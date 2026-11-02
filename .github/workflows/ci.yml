@@ -8,3 +8,4 @@ jobs:
         uses: Karasu-Lab/JsWorkflows/.github/workflows/ci.yml@main
         permissions:
             contents: write
+        secrets: inherit
