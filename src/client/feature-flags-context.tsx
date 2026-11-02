@@ -1,14 +1,16 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import type { z } from 'zod';
+import * as React from "react";
+import type { z } from "zod";
 
-const FeatureFlagsContext = React.createContext<Record<string, unknown> | null>(null);
+const FeatureFlagsContext = React.createContext<Record<string, unknown> | null>(
+    null,
+);
 
 export interface FeatureFlagsClientProviderProps {
-  /** `null` when the nearest `FeatureFlagsProvider` could not resolve its flags (fetch failure or schema mismatch). */
-  flags: Record<string, unknown> | null;
-  children: React.ReactNode;
+    /** `null` when the nearest `FeatureFlagsProvider` could not resolve its flags (fetch failure or schema mismatch). */
+    flags: Record<string, unknown> | null;
+    children: React.ReactNode;
 }
 
 /**
@@ -17,9 +19,16 @@ export interface FeatureFlagsClientProviderProps {
  * renders this Client Component and passes it the already-validated,
  * plain-JSON-serializable flags object as a prop.
  */
-export function FeatureFlagsClientProvider({ flags, children }: FeatureFlagsClientProviderProps) {
-  const value = React.useMemo(() => flags, [flags]);
-  return <FeatureFlagsContext.Provider value={value}>{children}</FeatureFlagsContext.Provider>;
+export function FeatureFlagsClientProvider({
+    flags,
+    children,
+}: FeatureFlagsClientProviderProps) {
+    const value = React.useMemo(() => flags, [flags]);
+    return (
+        <FeatureFlagsContext.Provider value={value}>
+            {children}
+        </FeatureFlagsContext.Provider>
+    );
 }
 
 /**
@@ -32,7 +41,9 @@ export function FeatureFlagsClientProvider({ flags, children }: FeatureFlagsClie
  * @example
  * const flags = useFeatureFlags<typeof appFlagsSchema>();
  */
-export function useFeatureFlags<TSchema extends z.ZodType>(): z.infer<TSchema> | null {
-  const ctx = React.useContext(FeatureFlagsContext);
-  return ctx as z.infer<TSchema> | null;
+export function useFeatureFlags<
+    TSchema extends z.ZodType,
+>(): z.infer<TSchema> | null {
+    const ctx = React.useContext(FeatureFlagsContext);
+    return ctx as z.infer<TSchema> | null;
 }
