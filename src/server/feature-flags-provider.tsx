@@ -1,18 +1,18 @@
-import type { ReactNode } from 'react';
-import { evaluate } from 'flags/next';
-import type { Flag } from 'flags/next';
-import type { z } from 'zod';
-import { FeatureFlagsClientProvider } from '../client/feature-flags-context';
+import type { Flag } from "flags/next";
+import { evaluate } from "flags/next";
+import type { ReactNode } from "react";
+import type { z } from "zod";
+import { FeatureFlagsClientProvider } from "../client/feature-flags-context";
 
 export interface FeatureFlagsProviderProps<TSchema extends z.ZodType> {
-  /**
-   * Flag declarations (from `flag()`), keyed to match `schema`'s shape.
-   * Declared once at module scope in the consuming app (e.g. `src/lib/flags.ts`).
-   */
-  flags: { [K in keyof z.infer<TSchema>]: Flag<z.infer<TSchema>[K]> };
-  /** Zod schema validating the evaluated flag values. */
-  schema: TSchema;
-  children: ReactNode;
+    /**
+     * Flag declarations (from `flag()`), keyed to match `schema`'s shape.
+     * Declared once at module scope in the consuming app (e.g. `src/lib/flags.ts`).
+     */
+    flags: { [K in keyof z.infer<TSchema>]: Flag<z.infer<TSchema>[K]> };
+    /** Zod schema validating the evaluated flag values. */
+    schema: TSchema;
+    children: ReactNode;
 }
 
 /**
@@ -23,16 +23,20 @@ export interface FeatureFlagsProviderProps<TSchema extends z.ZodType> {
  * than throwing.
  */
 export async function FeatureFlagsProvider<TSchema extends z.ZodType>({
-  flags: flagDeclarations,
-  schema,
-  children,
+    flags: flagDeclarations,
+    schema,
+    children,
 }: FeatureFlagsProviderProps<TSchema>) {
-  let flags: Record<string, unknown> | null;
-  try {
-    const values = await evaluate(flagDeclarations);
-    flags = schema.parse(values) as Record<string, unknown>;
-  } catch {
-    flags = null;
-  }
-  return <FeatureFlagsClientProvider flags={flags}>{children}</FeatureFlagsClientProvider>;
+    let flags: Record<string, unknown> | null;
+    try {
+        const values = await evaluate(flagDeclarations);
+        flags = schema.parse(values) as Record<string, unknown>;
+    } catch {
+        flags = null;
+    }
+    return (
+        <FeatureFlagsClientProvider flags={flags}>
+            {children}
+        </FeatureFlagsClientProvider>
+    );
 }

@@ -1,34 +1,34 @@
 {
-  "name": "@karasu-lab/flags-sdk",
-  "version": "0.1.0",
-  "exports": {
-    "./server": "./src/server/index.ts",
-    "./client": "./src/client/index.ts"
-  },
-  "dependencies": {
-    "flags": "^4.2.0",
-    "zod": "^4.5.4"
-  },
-  "devDependencies": {
-    "@types/node": "^20.19.1",
-    "@types/react": "^19.1.8",
-    "next": "^15.3.9",
-    "react": "^19",
-    "typescript": "^5.9.3"
-  },
-  "peerDependencies": {
-    "next": "^15.3.9",
-    "react": "^19"
-  },
-  "files": [
-    "src"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Karasu-Lab/flags-sdk.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "public"
-  }
+    "name": "@karasu-lab/flags-sdk",
+    "version": "0.1.0",
+    "exports": {
+        "./server": "./src/server/index.ts",
+        "./client": "./src/client/index.ts"
+    },
+    "dependencies": {
+        "flags": "^4.2.0",
+        "zod": "^4.5.4"
+    },
+    "devDependencies": {
+        "@types/node": "^20.19.1",
+        "@types/react": "^19.1.8",
+        "next": "^15.3.9",
+        "react": "^19",
+        "typescript": "^5.9.3"
+    },
+    "peerDependencies": {
+        "next": "^15.3.9",
+        "react": "^19"
+    },
+    "files": [
+        "src"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Karasu-Lab/flags-sdk.git"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com",
+        "access": "public"
+    }
 }
