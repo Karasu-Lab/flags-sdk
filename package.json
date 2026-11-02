@@ -23,7 +23,12 @@
   "files": [
     "src"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karasu-Lab/flags-sdk.git"
+  },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   }
 }
